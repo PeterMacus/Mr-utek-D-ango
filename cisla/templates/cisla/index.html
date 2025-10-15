@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cisla</title>
+    <link rel="stylesheet" href="{% static 'cisla/cisla.css' %}">
+</head>
+<body>
+    <h1>App Cisla</h1>
+    <form method="post">
+        {% csrf_token %}
+        <input type="number" name="a">A:</input>
+        
+        <input type="number" name="b">B:</input>
+        <input type="submit" value="OK/">
+    </form>
+    <h2>{{vysledok}}</h2>
+</body>
+</html>

@@ -62,6 +62,20 @@ from django.shortcuts import render, HttpResponse
 from . import views
 
 def index(request):
-    return render(request, 'kalkulacka/index.html')
+    sucet = 10 + 5
+    sucin = 10 * 5
+    apar = "cislo A je parne
+    return render(request, 'kalkulacka/index.html', {"sucet":sucet, "sucin":sucin, "apar":apar})
 
-
+10.css , obrazky 
+- vytvoriť v priečinku  aplikacie priečinok static/nazov_aplikacie
+- v tomto priečinku vytvoriť css (napriklad kalkulacka.css)
+- do tohto priečinku nakopirovat obrazky  
+- do template (index.html) doplniť: 
+    - uplne na začiatok {% load static %}
+    - do hlavičky odkaz na style 
+    <head>
+        <link rel="stylesheet" href="{% static 'kalkulacka/kalkulacka.css' %}">
+    </head>
+- obrazok vložiť:
+<img src={% static 'kalkulacka/kalkulacka.png' %}>
