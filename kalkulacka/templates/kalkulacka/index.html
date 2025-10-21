@@ -1,27 +1,25 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kalkulacka</title>
-    <link rel="stylesheet" href="{% static 'kalkulacka/kalkulacka.css' %}">
+    <title>Ciselne Funkcie</title>
 </head>
 <body>
-    <h1>Kalkulačka</h1>
     <form method="post">
-        {% csrf_token %}
-        <input type="text" name="a">Zadaj číslo:</input>
-        <select name="operator" id="">
-            <option value="+">+</option>
-            <option value="-">-</option>
-            <option value="*">*</option>
-            <option value="/">/</option>
-        </select>
-        <input type="text" name="b">
-        <input type="submit">
+    {% csrf_token %}
+    <div class="cislo">
+        <label for="a">A:</label> <input type="number" name="a">
+    </div>
+    <div class="cislo">
+        <label for="b">B:</label> <input type="number" name="b">
+    </div>
+    <input type="submit">
     </form>
-    <h2>{{vysledok}}</h2>
-    <img src={% static 'kalkulacka/kalkulacka.png' %}>
+    <h2>{{vacsie}}</h2>
+    <h2>Cislo a je {{parneA}}</h2>
+    <h2>Cislo b je {{parneB}}</h2>
+    <h2>Cislo a {{prvoA}}</h2>
+    <h2>Cislo b {{prvoB}}</h2>
 </body>
 </html>
