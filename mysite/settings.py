@@ -40,6 +40,10 @@ INSTALLED_APPS = [
     'skuska',
     'kalkulacka',
     'cisla',
+    'prvocisla',
+    'vek',
+    'faktorial',
+    'cifsucet',
 ]
 
 MIDDLEWARE = [

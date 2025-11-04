@@ -22,4 +22,8 @@ urlpatterns = [
     path('skuska/', include('skuska.urls')),
     path('kalkulacka/', include('kalkulacka.urls')),
     path('cisla/', include('cisla.urls')),
+    path('prvocisla/', include('prvocisla.urls')),
+    path('vek/', include ('vek.urls')),
+    path('faktorial/', include ('faktorial.urls')),
+    path('cifsucet/', include ('cifsucet.urls')),
 ]
