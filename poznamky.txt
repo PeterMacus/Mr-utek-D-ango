@@ -79,3 +79,160 @@ def index(request):
     </head>
 - obrazok vložiť:
 <img src={% static 'kalkulacka/kalkulacka.png' %}>
+
+11.Modely(models.py)
+from django.db import models
+
+class Osoba(models.Model):
+    meno = models.CharField(max_length=100)
+    priezvisko = models.CharField(max_length=100)
+    vek = models.IntegerField()
+    datum = models.DateField()
+    email = models.EmailField()
+    muz = models.BooleanField()
+
+    def __str__(self):
+        return f"{self.meno} {self.priezvisko}"
+
+12.Vytvorenie štruktúry databázy podľa modelov :
+python manage.py makemigrations
+python manage.py migrate
+
+databaza sa defaultnevytvara v subore db.sqlite3
+
+13. vytvorenie prveho uživatela do admin rozhrania 
+python manage.py createsuperuser
+
+14.zahrnutie modelov do admin panela (admin.py)
+from django.contrib import admin
+from .models import Osoba
+
+admin.site.register(Osoba)
+
+
+
+
+
+
+
+
+OBJEKTY: 
+import datetime
+import os
+import random 
+class Osoba:
+    # konštruktor 
+    def __init__ (self, meno, priezvisko, rok):
+        self.meno = meno 
+        self.priezvisko = priezvisko
+        self.rok = rok
+        self.vek = datetime.date.today().year - self.rok
+        #atribúty (vlastnosti)
+
+    #metoda pozdrav
+    def pozdrav(self):
+        print("Tanken guten ich haise ", self.meno,self.priezvisko)
+
+
+    #metoda vypíš vek
+    def vypis_vek(self):
+        print("mám", self.vek, "rokov")
+
+
+    def __str__(self):
+        #stringova reprezentaci objektu, pri print vypíše toto
+        return f"{self.meno} {self.priezvisko} - Osoba"
+
+
+class Ucitel(Osoba):#dedicnost trieda ucitel zdedi vsetky metódy a atributy od triedy osoba
+    def __init__(self, meno, priezvisko, rok, titul, predmet, trieda-None):#trieda-None, znaemna ze atrubzt he beoivubby a defauktbe bude none
+        super().__init__(meno, priezvisko, rok)#použije konštruktor rodičovskej triedy 
+        self.titul = titul
+        self.predmet = predmet
+        self.trieda = trieda
+    def pozdrav(self):
+        if self.trieda:
+            print( "dobrý deň, som učiteľ", self.titul,self.meno, self.priezvisko, "a učím predmet", self.predmet, "a som triedy triede", self.trieda)
+        else:
+            print("dobrý deň, som učiteľ", self.titul,self.meno, self.priezvisko, "a učím predmet", self.predmet)
+
+
+    def __str__(self):
+        if self.trieda:
+            return f"{self.titul} {self.meno} {self.priezvisko}- Učiteľ, Predmet: {self.predmet}, Trieda: {self.trieda} "
+        else:
+            return f"{self.titul} {self.meno} {self.priezvisko}- Učiteľ, Predmet: {self.predmet}"
+
+class Student(Osoba):
+    def __init__(self, meno, priezvisko, rok, trieda):
+        super().__init__(meno, priezvisko, rok)
+        self.trieda = trieda
+
+    def pozdrav(self):
+        print( "čus,",self.meno, self.priezvisko,"meno mé, som v tridze", self.trieda )
+    
+    def __str__(self):
+        return f"{self.meno} {self.priezvisko}- Študent ,Trieda: {self.trieda} "
+    
+
+#vytvorenie objektu 
+jozef = Osoba("Jožko", "Meno", 2008)
+jozef.pozdrav()
+jozef.vypis_vek()
+
+ucitel1 = Ucitel("Michal", "Šutek", 1978, "Mgr.","ZCY", "IV.AT")
+ucitel1.pozdrav()
+ucitel1.vypis_vek()
+print(ucitel1)
+
+student1 = Student("Samuel","Škuta",2007,"3.AT")
+student1.pozdrav()
+student1.vypis_vek()
+print(student1)
+
+#  NAČÍTANIE MIEn
+with open(r"Z:\mená\mena.txt", "r", encoding="utf-8") as f:
+    mena = f.read().splitlines()
+
+with open(r"Z:\mená\priezviska.txt", "r", encoding="utf-8") as f:
+    priezviska = f.read().splitlines()
+
+#  MOŽNÉ TRIEDY
+
+rocniky = ["I", "II", "III", "IV"]
+pismena = ["A", "B", "C", "D"]
+
+
+
+
+tituly = ["Mgr.", "Ing.", "PaedDr."]
+
+#  GENEROVANIE ŠTUDENTOV
+
+print("\n===== ŠTUDENTI =====")
+studenti = []
+
+for i in range(10):
+    meno_random = random.choice(mena)
+    priez_random = random.choice(priezviska)
+
+
+    trieda = random.choice(rocniky) + "." + random.choice(pismena)
+
+    s = Student(meno_random, priez_random, trieda)
+    studenti.append(s)
+    print(s)
+
+#  GENEROVANIE UČITEĽOV
+
+print("\n===== UČITELIA =====")
+ucitelia = []
+for i in range(10):
+    meno_random = random.choice(mena)
+    priez_random = random.choice(priezviska)
+    titul = random.choice(tituly)
+    predmet = "ZCY"  # môžeš neskôr urobiť náhodné predmety
+    trieda = random.choice(rocniky) + "." + random.choice(pismena)
+    u = Ucitel(meno_random, priez_random, titul, predmet, trieda)
+    ucitelia.append(u)
+    print(u)
