@@ -26,4 +26,5 @@ urlpatterns = [
     path('vek/', include ('vek.urls')),
     path('faktorial/', include ('faktorial.urls')),
     path('cifsucet/', include ('cifsucet.urls')),
+    path('skola/', include('skola.urls')),
 ]
